@@ -15,8 +15,9 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get install docker-ce=17.03.2~ce-0~ubuntu-xenial
 
-sudo apt install libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf
-sudo apt install pkg-config python-ipaddr iproute2  libcap-dev libnl-3-dev libnet1-dev 
+sudo apt install build-essential
+sudo apt install --no-install-recommends libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf
+sudo apt install --no-install-recommends pkg-config python-ipaddr iproute2  libcap-dev libnl-3-dev libnet1-dev 
 sudo apt install --no-install-recommends asciidoc xmlto
 git clone https://github.com/checkpoint-restore/criu.git
 cd criu
