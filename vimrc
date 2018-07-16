@@ -47,6 +47,27 @@ autocmd BufWritePost *.cpp,*.h,*.c,*.py call UpdateTags()
 autocmd FileType c,cpp,java,php,py autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd FileType c,cpp,java,php,py autocmd BufWritePre <buffer> :retab
 
+" Removes trailing spaces
+function TrimWhiteSpace()
+  %s/\s*$//
+    ''
+endfunction
+
+set list listchars=trail:.,extends:>
+autocmd FileWritePre *.c,*.cpp,*.java,*.py call TrimWhiteSpace()
+autocmd FileAppendPre *.c,*.cpp,*.java,*.py call TrimWhiteSpace()
+autocmd FilterWritePre *.c,*.cpp,*.java,*.py* call TrimWhiteSpace()
+autocmd BufWritePre *.c,*.cpp,*.java,*.py call TrimWhiteSpace()
+
+map <F2> :call TrimWhiteSpace()<CR>
+map! <F2> :call TrimWhiteSpace()<CR>
+
+color desert
+
 "set statusline+=%F "Full path display
 set statusline+=%f\ %l\:%c
 set laststatus=2
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
