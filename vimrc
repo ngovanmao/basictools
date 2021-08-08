@@ -68,6 +68,50 @@ color desert
 set statusline+=%f\ %l\:%c
 set laststatus=2
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%101v.\+/
 
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+fun! LongLineHighlightInit()
+    if !exists("w:llh")
+        call LongLineHighlightOn()
+    endif
+endfunction
+
+fun! LongLineHighlightOn()
+    "let w:llh = matchadd("OverLength", '\%81v.')
+    let w:llh = matchadd("OverLength", '\%81v.\+')
+endfunction
+
+fun! LongLineHighlightOff()
+    call matchdelete(w:llh)
+    let w:llh = 0
+endfunction
+
+fun! LongLineHighlightToggle()
+    if !exists("w:llh") || w:llh == 0
+        call LongLineHighlightOn()
+    else
+        call LongLineHighlightOff()
+    endif
+endfunction
+
+augroup LongLineHighlight
+    autocmd BufWinEnter * call LongLineHighlightInit()
+augroup end
+
+
+noremap <F3> : call LongLineHighlightToggle()<CR>
+
+
+fun! PasteToggle()
+    if !exists("w:paste") || w:paste == 0
+        let w:paste = 1
+        set paste
+    else
+        let w:paste = 0
+        set nopaste
+    endif
+endfunction
+
+noremap <F4> : call PasteToggle()<CR>
