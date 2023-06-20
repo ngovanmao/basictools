@@ -94,6 +94,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ## On Kworker
 ##### Join the cluster
 Use the output from __kubeadm token create__ command in previous step from the master server and run here.
+`kubeadm join 172.27.2.51:6443 --token i504yf.vfacy5mku1or5qp9     --discovery-token-ca-cert-hash sha256:75ba625958efced5d7f896764b1bcf4ab31c8e0d7aed0f505712e07da6f8dc13`
 
 ## Verifying the cluster (On kmaster)
 ##### Get Nodes status
